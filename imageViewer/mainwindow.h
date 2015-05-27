@@ -13,6 +13,9 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QTimer>
+
+#include "main.h"
 
 class MainWindow : public QMainWindow
 {
@@ -26,6 +29,10 @@ public:
 
 	void imageZoom(float scaling);
 
+protected slots:
+
+	void quitViewer();
+
 protected:
 
 	void init(const QString& imageFile);
@@ -38,15 +45,20 @@ protected:
 	void mouseMoveEvent(QMouseEvent *);
 	void keyReleaseEvent(QKeyEvent *);
 
+	void focusOutEvent(QFocusEvent *);
+	void focusInEvent(QFocusEvent *);
+
 	void dragEnterEvent(QDragEnterEvent *);
 	void dropEvent(QDropEvent *);
 
 private:
+	QTimer m_timer;
 	QImage m_image;
 	QRect m_imageShowArea;
 	QPoint m_lastPos;
 	QSize m_screenSize;
 	float m_imageScaling;
+	bool m_hasMotion, m_focusOut, m_imageOutofRange;
 };
 
 #endif // MAINWINDOW_H
