@@ -1,4 +1,4 @@
-/*
+﻿/*
  @ Author: wysaid
  @ Blog: blog.wysaid.org
  @ Date: 2015-5-27
@@ -14,6 +14,7 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QLabel>
 
 #include "main.h"
 
@@ -27,11 +28,15 @@ public:
 
 	bool openImage(const QString& filename);
 
-	void imageZoom(float scaling);
+	void imageZoom(float scaling, const QPoint& pnt);
 
 protected slots:
 
 	void quitViewer();
+	void scalingLabelFadeout();
+
+	void editImage();
+	void copyImage();
 
 protected:
 
@@ -51,14 +56,23 @@ protected:
 	void dragEnterEvent(QDragEnterEvent *);
 	void dropEvent(QDropEvent *);
 
+	void contextMenuEvent(QContextMenuEvent *);
+
+	void fixViewArea();
+
 private:
-	QTimer m_timer;
+	QTimer m_quitTimer, m_scalingTimer;
 	QImage m_image;
+	QLabel m_scalingLabel;
+
+private:
+	
 	QRect m_imageShowArea;
 	QPoint m_lastPos;
 	QSize m_screenSize;
 	float m_imageScaling;
-	bool m_hasMotion, m_focusOut, m_imageOutofRange;
+	bool m_hasMotion, m_isTracking, m_forceMotion;
+	bool m_notQuitThisTime, m_imageOutofRange;
 };
 
 #endif // MAINWINDOW_H
