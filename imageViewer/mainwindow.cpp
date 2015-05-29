@@ -40,6 +40,8 @@ MainWindow::MainWindow(const QString& imageFile, QWidget *parent)
 	m_scalingLabel.setEnabled(false);
 	m_scalingLabel.setFocusPolicy(Qt::FocusPolicy::NoFocus);
 	m_scalingLabel.hide();
+
+	bgTransparent();
 }
 
 MainWindow::~MainWindow()
@@ -206,6 +208,24 @@ void MainWindow::gifFrameChanged(int index)
 	}
 }
 
+void MainWindow::bgTransparent()
+{
+	m_bgColor = QColor(0, 0, 0, 0xaa);
+	update();
+}
+
+void MainWindow::bgWhite()
+{
+	m_bgColor = QColor(0xff, 0xff, 0xff, 0xff);
+	update();
+}
+
+void MainWindow::bgBlack()
+{
+	m_bgColor = QColor(0, 0, 0, 0xff);
+	update();
+}
+
 void MainWindow::paintEvent(QPaintEvent *)
 {
 	if(m_image.isNull())
@@ -215,7 +235,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::SmoothPixmapTransform);
-	painter.fillRect(rect(), QColor(0, 0, 0, 0xaa));
+	painter.fillRect(rect(), m_bgColor);
 	painter.drawImage(m_imageShowArea , m_image);
 }
 
@@ -372,6 +392,14 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *e)
 		return;
 
 	QMenu menu(this);
+	QMenu* bgMenu = new QMenu(&menu);
+	
+	bgMenu->setTitle(QString::fromLocal8Bit("背景颜色"));
+	bgMenu->addAction(QString::fromLocal8Bit("半透明"), this, SLOT(bgTransparent()));
+	bgMenu->addAction(QString::fromLocal8Bit("白色"), this, SLOT(bgWhite()));
+	bgMenu->addAction(QString::fromLocal8Bit("黑色"), this, SLOT(bgBlack()));
+
+	menu.addMenu(bgMenu);
 	menu.addAction(QString::fromLocal8Bit("复制图片"), this, SLOT(copyImage()));
 	menu.addAction(QString::fromLocal8Bit("编辑图片"), this, SLOT(editImage()));
 	menu.addAction(QString::fromLocal8Bit("退出"), this, SLOT(quitViewer()));

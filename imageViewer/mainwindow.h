@@ -41,6 +41,10 @@ protected slots:
 
 	void gifFrameChanged(int index);
 
+	void bgTransparent();
+	void bgWhite();
+	void bgBlack();
+
 protected:
 
 	void init(const QString& imageFile);
@@ -76,6 +80,7 @@ private:
 	QRect m_imageShowArea;
 	QPoint m_lastPos;
 	QSize m_screenSize;
+	QColor m_bgColor;
 	float m_imageScaling;
 	bool m_hasMotion, m_isTracking, m_forceMotion;
 	bool m_notQuitThisTime, m_imageOutofRange;
