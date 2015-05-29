@@ -15,6 +15,7 @@
 #include <QKeyEvent>
 #include <QTimer>
 #include <QLabel>
+#include <QMovie>
 
 #include "main.h"
 
@@ -23,7 +24,7 @@ class MainWindow : public QMainWindow
 	Q_OBJECT
 
 public:
-	MainWindow(const QString& imageFile, QWidget *parent = 0);
+	MainWindow(const QString& imageFile, QWidget *parent = nullptr);
 	~MainWindow();
 
 	bool openImage(const QString& filename);
@@ -37,6 +38,8 @@ protected slots:
 
 	void editImage();
 	void copyImage();
+
+	void gifFrameChanged(int index);
 
 protected:
 
@@ -60,10 +63,13 @@ protected:
 
 	void fixViewArea();
 
+	bool _loadImage(const QString& filename);
+
 private:
 	QTimer m_quitTimer, m_scalingTimer;
 	QImage m_image;
 	QLabel m_scalingLabel;
+	QMovie* m_movieGif;
 
 private:
 	

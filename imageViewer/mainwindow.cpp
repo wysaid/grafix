@@ -18,7 +18,7 @@
 #define MID(n, minValue, maxValue) std::min(std::max(n, minValue), maxValue)
 
 MainWindow::MainWindow(const QString& imageFile, QWidget *parent)
-	: QMainWindow(parent), m_quitTimer(this), m_scalingTimer(this), m_scalingLabel(this), m_imageScaling(1.0f), m_isTracking(false), m_forceMotion(false), m_notQuitThisTime(true)
+	: QMainWindow(parent), m_quitTimer(this), m_scalingTimer(this), m_scalingLabel(this), m_movieGif(nullptr), m_imageScaling(1.0f), m_isTracking(false), m_forceMotion(false), m_notQuitThisTime(true)
 {
 	m_screenSize = QApplication::desktop()->size();
 	setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
@@ -62,53 +62,88 @@ void MainWindow::init(const QString& imageFile)
 
 bool MainWindow::openImage(const QString& filename)
 {
-	m_image = QImage(filename);
+	bool isGif = false;
 
-	if(!m_image.isNull())
+	if(filename.size() > 4)
 	{
-		if(m_image.width() <= m_screenSize.width() &&
-			m_image.height() <= m_screenSize.height())
+		auto&& nameData = filename.toLocal8Bit();
+		const char* data = nameData.constData() + nameData.size() - 4;
+		if(QString::fromLocal8Bit(data).toLower() == ".gif")
 		{
-			if(m_image.width() < 600 || m_image.height() < 400)
-			{
-				int w = std::max(m_image.width(), 600);
-				int h = std::max(m_image.height(), 400);
+			isGif = true;
+		}
+	}
 
-				setFixedSize(w, h);
-
-				auto&& newSz = (size() - m_image.size()) / 2;
-
-				m_imageScaling = 1.0f;
-				m_imageShowArea.setRect(newSz.width(), newSz.height(), m_image.width(), m_image.height());
-			}
-			else
-			{
-				setFixedSize(m_image.size());
-				m_imageScaling = 1.0f;
-				m_imageShowArea = m_image.rect();
-				
-			}
+	if(isGif)
+	{
+		auto mv = new QMovie(filename);
+		if(!mv->isValid())
+		{
+			delete mv;
+			mv = nullptr;
+			if(!_loadImage(filename))
+				return false;
 		}
 		else
 		{
-			setFixedSize(m_screenSize);
-			m_imageScaling = std::min(m_screenSize.width() / (float)m_image.width(), m_screenSize.height() / (float)m_image.height());
-			auto&& newSize = m_image.size() * m_imageScaling;
-			auto&& diffSize = (m_screenSize - newSize) / 2;
-			m_imageShowArea = QRect(diffSize.width(), diffSize.height(), newSize.width(), newSize.height());
+			delete m_movieGif;
+			m_movieGif = mv;
+			connect(m_movieGif, SIGNAL(frameChanged(int)), SLOT(gifFrameChanged(int)));
+			m_movieGif->start();
+			m_image = m_movieGif->currentImage();
+		}		
+	}
+	else
+	{
+		if(_loadImage(filename))
+		{
+			delete m_movieGif;
+			m_movieGif = nullptr;
 		}
-		
-		m_imageOutofRange = false;
-		auto&& sz = (m_screenSize - size()) / 2;
-		setGeometry(sz.width(), sz.height(), width(), height());
-		CGE_LOG_INFO("Image Size: %d x %d, View Area: x: %d, y: %d, w:%d, h: %d\n", m_image.width(), m_image.height(), m_imageShowArea.left(), m_imageShowArea.top(), m_imageShowArea.width(), m_imageShowArea.height());
-		m_scalingLabel.move((width() - m_scalingLabel.width()) / 2, (height() - m_scalingLabel.height()) / 2);
-		raise();
-		update();
-		return true;
+		else
+			return false;
 	}
 
-	return false;
+	if(m_image.width() <= m_screenSize.width() &&
+		m_image.height() <= m_screenSize.height())
+	{
+		if(m_image.width() < 600 || m_image.height() < 400)
+		{
+			int w = std::max(m_image.width(), 600);
+			int h = std::max(m_image.height(), 400);
+
+			setFixedSize(w, h);
+
+			auto&& newSz = (size() - m_image.size()) / 2;
+
+			m_imageScaling = 1.0f;
+			m_imageShowArea.setRect(newSz.width(), newSz.height(), m_image.width(), m_image.height());
+		}
+		else
+		{
+			setFixedSize(m_image.size());
+			m_imageScaling = 1.0f;
+			m_imageShowArea = m_image.rect();
+
+		}
+	}
+	else
+	{
+		setFixedSize(m_screenSize);
+		m_imageScaling = std::min(m_screenSize.width() / (float)m_image.width(), m_screenSize.height() / (float)m_image.height());
+		auto&& newSize = m_image.size() * m_imageScaling;
+		auto&& diffSize = (m_screenSize - newSize) / 2;
+		m_imageShowArea = QRect(diffSize.width(), diffSize.height(), newSize.width(), newSize.height());
+	}
+
+	m_imageOutofRange = false;
+	auto&& sz = (m_screenSize - size()) / 2;
+	setGeometry(sz.width(), sz.height(), width(), height());
+	CGE_LOG_INFO("Image Size: %d x %d, View Area: x: %d, y: %d, w:%d, h: %d\n", m_image.width(), m_image.height(), m_imageShowArea.left(), m_imageShowArea.top(), m_imageShowArea.width(), m_imageShowArea.height());
+	m_scalingLabel.move((width() - m_scalingLabel.width()) / 2, (height() - m_scalingLabel.height()) / 2);
+	raise();
+	update();
+	return true;
 }
 
 void MainWindow::imageZoom(float scaling, const QPoint& pos)
@@ -119,9 +154,17 @@ void MainWindow::imageZoom(float scaling, const QPoint& pos)
 	m_imageShowArea.setRect(newPos.x(), newPos.y(), newSz.width(), newSz.height());
 
 	if(newSz.width() <= width() && newSz.height() <= height())
+	{
 		m_imageOutofRange = false;
+		if(cursor().shape() != Qt::SizeAllCursor)
+			setCursor(Qt::SizeAllCursor);
+	}
 	else
+	{
 		m_imageOutofRange = true;
+		if(cursor().shape() != Qt::OpenHandCursor)
+			setCursor(Qt::OpenHandCursor);
+	}
 
 	fixViewArea();
 	m_imageScaling = scaling;
@@ -154,6 +197,15 @@ void MainWindow::copyImage()
 	clipboard->setImage(m_image);
 }
 
+void MainWindow::gifFrameChanged(int index)
+{
+	if(m_movieGif != nullptr)
+	{
+		m_image = m_movieGif->currentImage();
+		update();
+	}
+}
+
 void MainWindow::paintEvent(QPaintEvent *)
 {
 	if(m_image.isNull())
@@ -163,7 +215,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::SmoothPixmapTransform);
-	painter.fillRect(rect(), QColor(0, 0, 0, 0x50));
+	painter.fillRect(rect(), QColor(0, 0, 0, 0xaa));
 	painter.drawImage(m_imageShowArea , m_image);
 }
 
@@ -324,6 +376,8 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *e)
 	menu.addAction(QString::fromLocal8Bit("编辑图片"), this, SLOT(editImage()));
 	menu.addAction(QString::fromLocal8Bit("退出"), this, SLOT(quitViewer()));
 	menu.exec(e->globalPos());
+	if(hasFocus())
+		setWindowOpacity(1.0);
 }
 
 void MainWindow::fixViewArea()
@@ -351,4 +405,13 @@ void MainWindow::fixViewArea()
 		else if(m_imageShowArea.bottom() < height())
 			m_imageShowArea.setRect(m_imageShowArea.left(), height() - m_imageShowArea.height(), m_imageShowArea.width(), m_imageShowArea.height());
 	}
+}
+
+bool MainWindow::_loadImage(const QString& filename)
+{
+	auto&& img = QImage(filename);
+	if(img.isNull())
+		return false;
+	m_image = img;
+	return true;
 }
