@@ -1,78 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;cxx;c;def</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h</Extensions>
-    </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="_res files">
       <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
-    <Filter Include="Generated Files">
+    <Filter Include="_gen files">
       <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Generated Files\Debug">
+    <Filter Include="_gen files\Debug">
       <UniqueIdentifier>{8a623057-33b0-44a2-8c48-24d92242c188}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Generated Files\Release">
+    <Filter Include="_gen files\Release">
       <UniqueIdentifier>{cf272008-e89f-4000-ac84-831c6d2b9d29}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Generated Files\ReleaseLog">
+    <Filter Include="_gen files\ReleaseLog">
       <UniqueIdentifier>{ab0542b6-127e-42ad-8f17-152d939583b1}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="_forms">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Main View">
+      <UniqueIdentifier>{1d8224d6-2227-423f-8045-142450d26553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{ec480a39-8a22-4524-9292-0e7fe943676c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collage">
+      <UniqueIdentifier>{ca322de4-a13d-40d5-8cdd-6a8a535c1573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Batch">
+      <UniqueIdentifier>{c6bc660b-caa2-4162-a89b-259a4356f4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{21e99760-0f43-421e-9919-680ce342d911}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
+      <Filter>_gen files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
-      <Filter>Generated Files\Release</Filter>
+      <Filter>_gen files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\ReleaseLog\moc_mainwindow.cpp">
-      <Filter>Generated Files\ReleaseLog</Filter>
+      <Filter>_gen files\ReleaseLog</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
-      <Filter>Generated Files</Filter>
+      <Filter>_gen files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Main View</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Main View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="mainwindow.qrc">
-      <Filter>Resource Files</Filter>
+      <Filter>_res files</Filter>
     </CustomBuild>
     <CustomBuild Include="mainwindow.ui">
-      <Filter>Form Files</Filter>
+      <Filter>_forms</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
+      <Filter>Main View</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
-      <Filter>Generated Files</Filter>
+      <Filter>_gen files</Filter>
+    </ClInclude>
+    <ClInclude Include="editorMain.h">
+      <Filter>Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
