@@ -11,6 +11,13 @@
 
 class GrafixEditorWindow : public QMainWindow
 {
+	Q_OBJECT
+
+public:
+	GrafixEditorWindow(QWidget* parent = 0);
+	~GrafixEditorWindow();
+
+private:
 
 };
 

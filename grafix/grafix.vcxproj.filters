@@ -77,6 +77,15 @@
     <ClCompile Include="GeneratedFiles\ReleaseLog\moc_GrafixMainWindow.cpp">
       <Filter>_gen files\ReleaseLog</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_editorMain.cpp">
+      <Filter>_gen files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_editorMain.cpp">
+      <Filter>_gen files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\ReleaseLog\moc_editorMain.cpp">
+      <Filter>_gen files\ReleaseLog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.qrc">
@@ -88,13 +97,16 @@
     <CustomBuild Include="GrafixMainWindow.h">
       <Filter>Main View</Filter>
     </CustomBuild>
+    <CustomBuild Include="editor\editorMain.h">
+      <Filter>childView\Editor</Filter>
+    </CustomBuild>
+    <CustomBuild Include="editor\editorWindow.ui">
+      <Filter>_forms\editor</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>_gen files</Filter>
-    </ClInclude>
-    <ClInclude Include="editor\editorMain.h">
-      <Filter>childView\Editor</Filter>
     </ClInclude>
     <ClInclude Include="collage\collageMain.h">
       <Filter>childView\Collage</Filter>
@@ -104,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Main View</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_editorWindow.h">
+      <Filter>_gen files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
