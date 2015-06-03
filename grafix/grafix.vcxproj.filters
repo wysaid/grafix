@@ -33,9 +33,6 @@
     <Filter Include="Main View">
       <UniqueIdentifier>{1d8224d6-2227-423f-8045-142450d26553}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common">
-      <UniqueIdentifier>{21e99760-0f43-421e-9919-680ce342d911}</UniqueIdentifier>
-    </Filter>
     <Filter Include="childView">
       <UniqueIdentifier>{13aaf1db-868a-4500-b7df-7e0f39ddecbb}</UniqueIdentifier>
     </Filter>
@@ -104,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="batch\batchMain.h">
       <Filter>childView\Batch</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Main View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

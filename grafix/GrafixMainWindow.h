@@ -4,10 +4,10 @@
  @ Date: 2015-6-3
 */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef _MAINWINDOW_H_
+#define _MAINWINDOW_H_
 
-#include <QtWidgets/QMainWindow>
+#include "main.h"
 #include "ui_mainwindow.h"
 
 class GrafixMainWindow : public QMainWindow

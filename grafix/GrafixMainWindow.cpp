@@ -6,6 +6,10 @@
 
 #include "GrafixMainWindow.h"
 
+#include "editor/editorMain.h"
+#include "collage/collageMain.h"
+#include "batch/batchMain.h"
+
 GrafixMainWindow::GrafixMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
