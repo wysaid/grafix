@@ -33,17 +33,20 @@
     <Filter Include="Main View">
       <UniqueIdentifier>{1d8224d6-2227-423f-8045-142450d26553}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Editor">
-      <UniqueIdentifier>{ec480a39-8a22-4524-9292-0e7fe943676c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Collage">
-      <UniqueIdentifier>{ca322de4-a13d-40d5-8cdd-6a8a535c1573}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Batch">
-      <UniqueIdentifier>{c6bc660b-caa2-4162-a89b-259a4356f4ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{21e99760-0f43-421e-9919-680ce342d911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="childView">
+      <UniqueIdentifier>{13aaf1db-868a-4500-b7df-7e0f39ddecbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="childView\Editor">
+      <UniqueIdentifier>{ec480a39-8a22-4524-9292-0e7fe943676c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="childView\Batch">
+      <UniqueIdentifier>{c6bc660b-caa2-4162-a89b-259a4356f4ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="childView\Collage">
+      <UniqueIdentifier>{ca322de4-a13d-40d5-8cdd-6a8a535c1573}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +68,15 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Main View</Filter>
     </ClCompile>
+    <ClCompile Include="editor\editorMain.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="collage\collageMain.cpp">
+      <Filter>childView\Collage</Filter>
+    </ClCompile>
+    <ClCompile Include="batch\batchMain.cpp">
+      <Filter>childView\Batch</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.qrc">
@@ -81,8 +93,14 @@
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>_gen files</Filter>
     </ClInclude>
-    <ClInclude Include="editorMain.h">
-      <Filter>Editor</Filter>
+    <ClInclude Include="editor\editorMain.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="collage\collageMain.h">
+      <Filter>childView\Collage</Filter>
+    </ClInclude>
+    <ClInclude Include="batch\batchMain.h">
+      <Filter>childView\Batch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

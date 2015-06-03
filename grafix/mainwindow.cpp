@@ -3,8 +3,9 @@
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
-	setWindowFlags(Qt::WindowCloseButtonHint);
 	ui.setupUi(this);
+	setWindowFlags(Qt::WindowCloseButtonHint);
+	setFixedSize(size());
 }
 
 MainWindow::~MainWindow()

@@ -111,6 +111,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="batch\batchMain.cpp" />
+    <ClCompile Include="collage\collageMain.cpp" />
+    <ClCompile Include="editor\editorMain.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">true</ExcludedFromBuild>
@@ -183,7 +186,9 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="editorMain.h" />
+    <ClInclude Include="batch\batchMain.h" />
+    <ClInclude Include="collage\collageMain.h" />
+    <ClInclude Include="editor\editorMain.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
   </ItemGroup>
   <ItemGroup>
