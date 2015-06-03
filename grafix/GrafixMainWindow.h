@@ -10,13 +10,13 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
 
-class MainWindow : public QMainWindow
+class GrafixMainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
-	~MainWindow();
+	GrafixMainWindow(QWidget *parent = 0);
+	~GrafixMainWindow();
 
 private:
 	Ui::MainWindowClass ui;

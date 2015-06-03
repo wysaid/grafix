@@ -4,13 +4,13 @@
  @ Date: 2015-6-3
 */
 
-#include "mainwindow.h"
+#include "GrafixMainWindow.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	MainWindow w;
+	GrafixMainWindow w;
 	w.show();
 	return a.exec();
 }

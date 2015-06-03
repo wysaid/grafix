@@ -48,24 +48,15 @@
     <Filter Include="childView\Collage">
       <UniqueIdentifier>{ca322de4-a13d-40d5-8cdd-6a8a535c1573}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_forms\editor">
+      <UniqueIdentifier>{87821211-8fb6-4cb1-96b3-c8899b3b73c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
-      <Filter>_gen files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
-      <Filter>_gen files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\ReleaseLog\moc_mainwindow.cpp">
-      <Filter>_gen files\ReleaseLog</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
       <Filter>_gen files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Main View</Filter>
-    </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
       <Filter>Main View</Filter>
     </ClCompile>
     <ClCompile Include="editor\editorMain.cpp">
@@ -77,6 +68,18 @@
     <ClCompile Include="batch\batchMain.cpp">
       <Filter>childView\Batch</Filter>
     </ClCompile>
+    <ClCompile Include="GrafixMainWindow.cpp">
+      <Filter>Main View</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GrafixMainWindow.cpp">
+      <Filter>_gen files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GrafixMainWindow.cpp">
+      <Filter>_gen files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\ReleaseLog\moc_GrafixMainWindow.cpp">
+      <Filter>_gen files\ReleaseLog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.qrc">
@@ -85,7 +88,7 @@
     <CustomBuild Include="mainwindow.ui">
       <Filter>_forms</Filter>
     </CustomBuild>
-    <CustomBuild Include="mainwindow.h">
+    <CustomBuild Include="GrafixMainWindow.h">
       <Filter>Main View</Filter>
     </CustomBuild>
   </ItemGroup>

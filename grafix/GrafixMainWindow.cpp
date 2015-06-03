@@ -4,9 +4,9 @@
  @ Date: 2015-6-3
 */
 
-#include "mainwindow.h"
+#include "GrafixMainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
+GrafixMainWindow::GrafixMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 	setFixedSize(size());
 }
 
-MainWindow::~MainWindow()
+GrafixMainWindow::~GrafixMainWindow()
 {
 
 }
