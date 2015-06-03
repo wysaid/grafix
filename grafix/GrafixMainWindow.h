@@ -18,8 +18,16 @@ public:
 	GrafixMainWindow(QWidget *parent = 0);
 	~GrafixMainWindow();
 
+protected:
+	void init();
+
+protected slots:
+	void startEditor();
+	void startCollage();
+	void startBatch();
+
 private:
-	Ui::MainWindowClass ui;
+	Ui::MainWindowClass m_ui;
 };
 
 #endif // MAINWINDOW_H

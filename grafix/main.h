@@ -10,5 +10,15 @@
 #include <QtWidgets/QMainWindow>
 #include "cge.h"
 
+class GrafixMainWindow;
+
+class GlobalStaticVars
+{
+public:
+	static GrafixMainWindow* mainWindow;
+
+	static void showMainWindow();
+};
+
 
 #endif

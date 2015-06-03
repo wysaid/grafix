@@ -11,6 +11,15 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 	GrafixMainWindow w;
+	GlobalStaticVars::mainWindow = &w;
 	w.show();
 	return a.exec();
+}
+
+GrafixMainWindow* GlobalStaticVars::mainWindow;
+
+void GlobalStaticVars::showMainWindow()
+{
+	if(mainWindow != nullptr)
+		mainWindow->show();
 }

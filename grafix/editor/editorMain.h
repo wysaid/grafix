@@ -9,6 +9,8 @@
 
 #include "main.h"
 
+#include "ui_editorWindow.h"
+
 class GrafixEditorWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -18,7 +20,7 @@ public:
 	~GrafixEditorWindow();
 
 private:
-
+	Ui::EditorWindowClass m_ui;
 };
 
 

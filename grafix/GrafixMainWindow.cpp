@@ -13,12 +13,39 @@
 GrafixMainWindow::GrafixMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
-	ui.setupUi(this);
+	m_ui.setupUi(this);
 	setWindowFlags(Qt::WindowCloseButtonHint);
 	setFixedSize(size());
+	init();
 }
 
 GrafixMainWindow::~GrafixMainWindow()
 {
+	QApplication::quit();
+}
 
+void GrafixMainWindow::init()
+{
+	connect(m_ui.editBtn, SIGNAL(clicked()), SLOT(startEditor()));
+	connect(m_ui.collageBtn, SIGNAL(clicked()), SLOT(startCollage()));
+	connect(m_ui.batchBtn, SIGNAL(clicked()), SLOT(startBatch()));
+}
+
+void GrafixMainWindow::startEditor()
+{
+	CGE_LOG_INFO("startEditor...\n");
+
+	hide();
+	GrafixEditorWindow* editorWindow = new GrafixEditorWindow;
+	editorWindow->show();
+}
+
+void GrafixMainWindow::startCollage()
+{
+	CGE_LOG_INFO("startCollage...\n");
+}
+
+void GrafixMainWindow::startBatch()
+{
+	CGE_LOG_INFO("startBatch...\n");
 }
