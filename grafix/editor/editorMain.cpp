@@ -9,9 +9,22 @@
 GrafixEditorWindow::GrafixEditorWindow(QWidget* parent)
 {
 	m_ui.setupUi(this);
+	init();
 }
 
 GrafixEditorWindow::~GrafixEditorWindow()
 {
+	CGE_LOG_INFO("~GrafixEditorWindow...\n");
+}
 
+void GrafixEditorWindow::init()
+{
+	connect(m_ui.homeBtn, SIGNAL(clicked()), SLOT(backtoHomePage()));
+}
+
+void GrafixEditorWindow::backtoHomePage()
+{
+	CGE_LOG_INFO("GrafixEditorWindow::backtoHomePage...\n");
+	deleteLater();
+	GlobalStaticVars::showMainWindow();
 }

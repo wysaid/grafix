@@ -20,7 +20,7 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="homeBtn">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -77,9 +77,206 @@ background-color:#888
      </property>
      <property name="styleSheet">
       <string notr="true">#mainMenuView{
-background-color:#aaa
-}</string>
+background-color:#292929
+}
+
+QPushButton {
+border-radius:3px;
+padding:5px 1px;
+font-size:12px;
+font-family:&quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Hiragino Sans GB&quot;, &quot;Hiragino Sans GB W3&quot;, &quot;WenQuanYi Micro Hei&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, sans-serif;
+color:#ddd;
+}
+QPushButton:!hover {
+background : #292929
+}
+QPushButton:hover { background : #555 }
+QPushButton:hover:pressed {
+background : #111;
+color:#345;
+}
+QPushButton:checked {
+background : #000;
+color:rgb(44,99,147);
+}
+</string>
      </property>
+     <widget class="QPushButton" name="basicAdjBtn">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>基础编辑</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advancedAdjBtn">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>高级编辑</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="insideEffectsBtn">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>预置特效</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="imageCropBtn">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>160</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>图片裁剪</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>210</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>液化(变形)</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>260</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>边框</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>310</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>贴纸</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>360</y>
+        <width>80</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>自由绘画</string>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="secondMenuView" native="true">
      <property name="geometry">
@@ -96,6 +293,36 @@ background-color:#bbb
 }</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="canvasView" native="true">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>40</y>
+      <width>501</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#canvasView{
+background-color:#777;
+}</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="bottomToolView" native="true">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>550</y>
+      <width>471</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#bottomToolView{
+background-color:#555;
+}</string>
+    </property>
    </widget>
   </widget>
  </widget>

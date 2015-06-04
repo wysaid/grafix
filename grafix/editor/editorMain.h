@@ -19,6 +19,12 @@ public:
 	GrafixEditorWindow(QWidget* parent = 0);
 	~GrafixEditorWindow();
 
+protected:
+	void init();
+
+protected slots:
+	void backtoHomePage();
+	
 private:
 	Ui::EditorWindowClass m_ui;
 };
