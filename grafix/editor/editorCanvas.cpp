@@ -67,6 +67,9 @@ CanvasWidget::CanvasWidget(QWidget* parent) : QGLWidget(parent), m_isMoving(fals
 
 CanvasWidget::~CanvasWidget()
 {
+	makeCurrent();
+	delete m_program;
+	CGE_LOG_INFO("Editor Canvas destruct...\n");
 }
 
 void CanvasWidget::paintGL()

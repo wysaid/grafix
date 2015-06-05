@@ -23,6 +23,8 @@ public:
 protected:
 	void init();
 
+	void resizeEvent(QResizeEvent *);
+
 protected slots:
 	void backtoHomePage();
 	
