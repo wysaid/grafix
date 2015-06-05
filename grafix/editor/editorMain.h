@@ -8,6 +8,7 @@
 #define _EDITOR_MAIN_H_
 
 #include "main.h"
+#include "editorCanvas.h"
 
 #include "ui_editorWindow.h"
 
@@ -27,6 +28,8 @@ protected slots:
 	
 private:
 	Ui::EditorWindowClass m_ui;
+
+	CanvasWidget* m_canvas;
 };
 
 

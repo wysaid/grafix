@@ -19,6 +19,10 @@ GrafixEditorWindow::~GrafixEditorWindow()
 
 void GrafixEditorWindow::init()
 {
+	m_ui.canvasView->hide();
+	m_canvas = new CanvasWidget(this->centralWidget());
+	m_canvas->setGeometry(m_ui.canvasView->geometry());
+
 	connect(m_ui.homeBtn, SIGNAL(clicked()), SLOT(backtoHomePage()));
 }
 

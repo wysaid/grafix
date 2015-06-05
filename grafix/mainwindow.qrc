@@ -2,6 +2,7 @@
     <qresource prefix="grafix">
       <file>../res/bg.png</file>
       <file>../res/mainWindow/homepage.png</file>
+      <file>../res/logo.png</file>
 
       <file>../res/mainWindow/editBtn.png</file>
       <file>../res/mainWindow/collageBtn.png</file>

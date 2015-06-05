@@ -20,7 +20,8 @@
    <string notr="true">#centralWidget{background-image:url(':grafix/res/mainWindow/homepage.png');}
 #editBtn{background-image:url(':grafix/res/mainWindow/editBtn.png');}
 #collageBtn{background-image:url(':grafix/res/mainWindow/collageBtn.png');}
-#batchBtn{background-image:url(':grafix/res/mainWindow/batchBtn.png');}</string>
+#batchBtn{background-image:url(':grafix/res/mainWindow/batchBtn.png');}
+</string>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
