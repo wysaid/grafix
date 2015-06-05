@@ -96,7 +96,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;QT_OPENGL_LIB;LIBCGE4QT_LIB=1;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;CGE_KEEP_LOG_INFO;CGE_KEEP_LOG_CODE;CGE_KEEP_LOG_ERROR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtANGLE;$(SolutionDir)libCGE\include;$(SolutionDirlibCGE\)include\filters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtANGLE;$(SolutionDir)libCGE\include;$(SolutionDir)libCGE\include\filters;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -107,7 +107,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(SolutionDir)libCGE\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;libEGL.lib;libGLESv2.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;libCGE4QTlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;libEGL.lib;libGLESv2.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;libCGE4QT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -175,7 +175,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">Moc%27ing GrafixMainWindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DLIBCGE4QT_LIB=1 -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DCGE_KEEP_LOG_INFO -DCGE_KEEP_LOG_CODE -DCGE_KEEP_LOG_ERROR "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtANGLE" "-I$(SolutionDir)libCGE\include" "-I$(SolutionDirlibCGE\)include\filters"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DLIBCGE4QT_LIB=1 -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DCGE_KEEP_LOG_INFO -DCGE_KEEP_LOG_CODE -DCGE_KEEP_LOG_ERROR  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtANGLE" "-I$(SolutionDir)libCGE\include" "-I$(SolutionDir)libCGE\include\filters"</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +225,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">Moc%27ing editorMain.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DLIBCGE4QT_LIB=1 -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DCGE_KEEP_LOG_INFO -DCGE_KEEP_LOG_CODE -DCGE_KEEP_LOG_ERROR "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtANGLE" "-I$(SolutionDir)libCGE\include" "-I$(SolutionDirlibCGE\)include\filters"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DLIBCGE4QT_LIB=1 -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DCGE_KEEP_LOG_INFO -DCGE_KEEP_LOG_CODE -DCGE_KEEP_LOG_ERROR  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtANGLE" "-I$(SolutionDir)libCGE\include" "-I$(SolutionDir)libCGE\include\filters"</Command>
     </CustomBuild>
     <CustomBuild Include="editor\editorCanvas.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -239,7 +239,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">Moc%27ing editorCanvas.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DLIBCGE4QT_LIB=1 -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DCGE_KEEP_LOG_INFO -DCGE_KEEP_LOG_CODE -DCGE_KEEP_LOG_ERROR "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtANGLE" "-I$(SolutionDir)libCGE\include" "-I$(SolutionDirlibCGE\)include\filters"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='ReleaseLog|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DLIBCGE4QT_LIB=1 -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DCGE_KEEP_LOG_INFO -DCGE_KEEP_LOG_CODE -DCGE_KEEP_LOG_ERROR  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtANGLE" "-I$(SolutionDir)libCGE\include" "-I$(SolutionDir)libCGE\include\filters"</Command>
     </CustomBuild>
     <ClInclude Include="GeneratedFiles\ui_editorWindow.h" />
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
