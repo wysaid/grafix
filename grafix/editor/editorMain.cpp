@@ -6,6 +6,16 @@
 
 #include "editorMain.h"
 
+bool enableGLFunction(void* arg)
+{
+	if(arg)
+	{
+		((GrafixEditorWindow*)arg)->useCanvasContext();
+		return true;
+	}
+	return false;
+}
+
 GrafixEditorWindow::GrafixEditorWindow(QWidget* parent)
 {
 	m_ui.setupUi(this);
@@ -22,8 +32,8 @@ void GrafixEditorWindow::init()
 {
 	m_ui.canvasView->hide();
 	m_canvas = new CanvasWidget(centralWidget());
+	CGE::cgeSetGLContextEnableFunction(enableGLFunction, this);
 	m_canvas->setGeometry(m_ui.canvasView->geometry());
-
 	connect(m_ui.homeBtn, SIGNAL(clicked()), SLOT(backtoHomePage()));
 }
 
@@ -53,4 +63,9 @@ void GrafixEditorWindow::resizeEvent(QResizeEvent *)
 		m_ui.bottomToolView->setGeometry(g.x(), h - g.height() - 5, w - g.x() - 20, g.height());
 	}
 	
+}
+
+void GrafixEditorWindow::useCanvasContext()
+{
+	m_canvas->makeCurrent();
 }

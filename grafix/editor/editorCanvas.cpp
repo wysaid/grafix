@@ -55,7 +55,7 @@ void main()
 
 CGEConstString CanvasWidget::paramTexSizeName = "texSize";
 
-CanvasWidget::CanvasWidget(QWidget* parent) : QGLWidget(parent), m_isMoving(false), m_program(nullptr)
+CanvasWidget::CanvasWidget(QWidget* parent) : QGLWidget(parent), m_isMoving(false), m_program(nullptr), m_contextMenu(nullptr)
 {	
 	setAttribute(Qt::WA_PaintOnScreen);
 	setAttribute(Qt::WA_NoSystemBackground);
@@ -63,6 +63,7 @@ CanvasWidget::CanvasWidget(QWidget* parent) : QGLWidget(parent), m_isMoving(fals
 	setCursor(Qt::CursorShape::OpenHandCursor);
 	setFocusPolicy(Qt::ClickFocus);
 	setAcceptDrops(true);
+	setContextMenuPolicy(Qt::DefaultContextMenu);
 }
 
 CanvasWidget::~CanvasWidget()
@@ -82,12 +83,11 @@ void CanvasWidget::paintGL()
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, width() * devicePixelRatio(), height() * devicePixelRatio());
 
-	if(m_program != nullptr)
+	if(m_program != nullptr && m_bgColor[3] <= 0.0f)
 	{
 		glDisable(GL_BLEND);
 		m_program->bind();
 		m_bgTexture.bindToIndex(0);
-		//		glUniform1i(m_bgTextureLocation, 4);
 
 		glBindBuffer(GL_ARRAY_BUFFER, CGE::CGEGlobalConfig::sVertexBufferCommon);
 		glEnableVertexAttribArray(m_posAttribLocation);
@@ -96,6 +96,7 @@ void CanvasWidget::paintGL()
 	}
 	else
 	{
+		glClearColor(m_bgColor[0], m_bgColor[1], m_bgColor[2], m_bgColor[3]);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
@@ -123,9 +124,6 @@ void CanvasWidget::initializeGL()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	cgeInitialize(width(), height(), CGE::CGEGlobalConfig::InitArguments(CGE::CGEGlobalConfig::CGE_INIT_DEFAULT & ~CGE::CGEGlobalConfig::CGE_INIT_SPRITEBUILTIN));
-	// 	CGE::cgeSetCommonLoadFunction(resourceLoadFunc, nullptr);
-	// 	CGE::cgeSetCommonUnloadFunction(resourceReleaseFunc, nullptr);
-	//	CGE::cgeInitExtends();
 
 	CGE::SharedTexture t = genSharedTextureWidthImageName(":grafix/res/logo.png");
 
@@ -167,6 +165,8 @@ void CanvasWidget::resizeGL(int w, int h)
 
 void CanvasWidget::mousePressEvent(QMouseEvent *e)
 {
+	if(e->button() != Qt::MouseButton::LeftButton)
+		return;
 	setCursor(Qt::CursorShape::ClosedHandCursor);
 	m_isMoving = true;
 	m_lastX = e->globalX();
@@ -239,10 +239,42 @@ void CanvasWidget::dropEvent(QDropEvent *e)
 	auto filename = url.toLocalFile();
 	if(filename.isEmpty())
 	{
-		QMessageBox::warning(this, "Invalid Image!", QString::fromLocal8Bit("%1 不是本地图像文件!").arg(url.toString()));
+		QMessageBox::warning(this, "Invalid Image!", GF_STR("%1 不是本地图像文件!").arg(url.toString()));
 		return ;
 	}
 	openImage(filename);
+}
+
+void CanvasWidget::contextMenuEvent(QContextMenuEvent *e)
+{
+	if(!underMouse())
+		return;
+
+	if(m_contextMenu == nullptr)
+	{
+		m_contextMenu = new QMenu(this);
+		QMenu* bgMenu = new QMenu(m_contextMenu);
+
+		bgMenu->setTitle(GF_STR("背景颜色"));
+		bgMenu->addAction(GF_STR("默认"), this, SLOT(bgDefault()));
+		bgMenu->addAction(GF_STR("白色"), this, SLOT(bgWhite()));
+		bgMenu->addAction(GF_STR("黑色"), this, SLOT(bgBlack()));
+		bgMenu->addAction(GF_STR("灰色"), this, SLOT(bgGray()));
+		auto&& bgActions = bgMenu->actions();
+
+		for(auto ac : bgActions)
+		{
+			ac->setCheckable(true);
+		}
+		m_bgActive = bgActions.first();
+		m_bgActive->setChecked(true);
+		m_contextMenu->addAction(GF_STR("复制"), this, SLOT(copyImgToClipBoard()));
+		m_contextMenu->addAction(GF_STR("保存"), this, SLOT(saveImage()));
+		m_contextMenu->addAction(GF_STR("另存为"), this, SLOT(saveImageAs()));
+		m_contextMenu->addSeparator();
+		m_contextMenu->addMenu(bgMenu);
+	}
+	m_contextMenu->exec(e->globalPos());
 }
 
 bool CanvasWidget::openImage(const QString& filename)
@@ -260,13 +292,13 @@ bool CanvasWidget::openImage(const QString& filename)
 
 	if(img.width() < 1 || img.height() < 1)
 	{
-		QMessageBox::information(this, QString::fromLocal8Bit("无法打开图片"), QString::fromLocal8Bit("%1 无法被识别为正确可支持的图片，无法打开， 请重新选择!").arg(filename));
+		QMessageBox::information(this, GF_STR("无法打开图片"), GF_STR("%1 无法被识别为正确可支持的图片，无法打开， 请重新选择!").arg(filename));
 		return false;
 	}
 
 	if(img.width() * img.height() > sMaxImageSize)
 	{
-		CGE_LOG_ERROR("%s", (const char*)QString::fromLocal8Bit("你选择的图片尺寸为 %1 * %2, 总共 %3M像素, 尺寸过大不利于实时处理， 为了保证内存占用不至于过大以及不影响调整速度， 现将图片裁剪至 %4M像素以内.\n").arg(img.width()).arg(img.height()).arg(img.width() * img.height() / 1e6f).arg(sMaxImageSize / 1e6f).toLocal8Bit());
+		CGE_LOG_ERROR("%s", (const char*)GF_STR("你选择的图片尺寸为 %1 * %2, 总共 %3M像素, 尺寸过大不利于实时处理， 为了保证内存占用不至于过大以及不影响调整速度， 现将图片裁剪至 %4M像素以内.\n").arg(img.width()).arg(img.height()).arg(img.width() * img.height() / 1e6f).arg(sMaxImageSize / 1e6f).toLocal8Bit());
 		float ratio = sqrtf(sMaxImageSize / (img.width() * img.height()));
 		QSize s(img.width() * ratio, img.height() * ratio);
 		img = img.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
@@ -288,7 +320,7 @@ bool CanvasWidget::openImage(const QString& filename)
 	}
 	else
 	{
-		QMessageBox::information(this, QString::fromLocal8Bit("未知错误"), QString::fromLocal8Bit("打开图片失败"));
+		QMessageBox::information(this, GF_STR("未知错误"), GF_STR("打开图片失败"));
 		return false;
 	}
 }
@@ -349,4 +381,76 @@ void CanvasWidget::imageZoomOut()
 {
 	imageZoom(1.1f);
 	updateGL();
+}
+
+void CanvasWidget::bgDefault()
+{
+	m_bgColor[3] = -1.0f; //使用格子
+	m_bgActive->setChecked(false);
+	QAction* ac = dynamic_cast<QAction*>(sender());
+	if(ac)
+	{
+		ac->setChecked(true);
+		m_bgActive = ac;
+	}
+	updateGL();
+}
+
+void CanvasWidget::bgWhite()
+{
+	m_bgColor = CGE::Vec4f(1.0f, 1.0f, 1.0f, 1.0f);
+	m_bgActive->setChecked(false);
+	QAction* ac = dynamic_cast<QAction*>(sender());
+	if(ac)
+	{
+		ac->setChecked(true);
+		m_bgActive = ac;
+	}
+	updateGL();
+}
+
+void CanvasWidget::bgBlack()
+{
+	m_bgColor = CGE::Vec4f(0.0f, 0.0f, 0.0f, 1.0f);
+	m_bgActive->setChecked(false);
+	QAction* ac = dynamic_cast<QAction*>(sender());
+	if(ac)
+	{
+		ac->setChecked(true);
+		m_bgActive = ac;
+	}
+	updateGL();
+}
+
+void CanvasWidget::bgGray()
+{
+	m_bgColor = CGE::Vec4f(0.4f, 0.4f, 0.4f, 1.0f);
+	m_bgActive->setChecked(false);
+	QAction* ac = dynamic_cast<QAction*>(sender());
+	if(ac)
+	{
+		ac->setChecked(true);
+		m_bgActive = ac;
+	}
+	updateGL();
+}
+
+void CanvasWidget::copyImgToClipBoard()
+{
+
+}
+
+void CanvasWidget::saveImage()
+{
+
+}
+
+void CanvasWidget::saveImageAs()
+{
+
+}
+
+void CanvasWidget::fixSpritePos()
+{
+
 }

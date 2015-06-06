@@ -20,9 +20,12 @@ public:
 	GrafixEditorWindow(QWidget* parent = 0);
 	~GrafixEditorWindow();
 
+	void useCanvasContext();
+
 protected:
 	void init();
 
+	// events
 	void resizeEvent(QResizeEvent *);
 
 protected slots:

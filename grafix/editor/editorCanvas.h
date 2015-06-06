@@ -84,6 +84,15 @@ public slots:
 	void imageZoomIn();
 	void imageZoomOut();
 
+	void bgDefault();
+	void bgWhite();
+	void bgBlack();
+	void bgGray();
+
+	void copyImgToClipBoard();
+	void saveImage();
+	void saveImageAs();
+
 protected:
 	void paintGL();
 	void initializeGL();
@@ -97,7 +106,13 @@ protected:
 	void dragEnterEvent(QDragEnterEvent *);
 	void dropEvent(QDropEvent *);
 
+	void contextMenuEvent(QContextMenuEvent *);
+
 	static CGEConstString paramTexSizeName;
+
+	void setContextMenuIcons();
+
+	void fixSpritePos();
 
 private:
 	DisplaySprite* m_sprite;
@@ -110,6 +125,9 @@ private:
 	CGE::SharedTexture m_bgTexture;
 
 	CGE::CGEImageHandler m_handler;	
+	CGE::Vec4f m_bgColor;
+	QMenu* m_contextMenu;
+	QAction* m_bgActive;
 };
 
 CGE::SharedTexture genSharedTextureWidthImageName(const char* filename, GLenum filter = GL_LINEAR);

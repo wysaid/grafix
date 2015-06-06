@@ -8,7 +8,10 @@
 #define _MAIN_H_
 
 #include <QtWidgets/QMainWindow>
+#include <QMenu>
 #include "cge.h"
+
+#define GF_STR QString::fromLocal8Bit
 
 class GrafixMainWindow;
 

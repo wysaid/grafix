@@ -48,6 +48,11 @@
     <Filter Include="_forms\editor">
       <UniqueIdentifier>{87821211-8fb6-4cb1-96b3-c8899b3b73c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_gen files\gra_dev">
+      <UniqueIdentifier>{701f584d-b50b-4b58-a345-4e9ad0e6b4ce}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
@@ -68,6 +73,30 @@
     <ClCompile Include="GrafixMainWindow.cpp">
       <Filter>Main View</Filter>
     </ClCompile>
+    <ClCompile Include="editor\editorCanvas.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorBasicAdjust.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorAdvancedAdjust.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorEffects.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorBorders.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorLiquidation.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorCrop.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="editor\editorPainting.cpp">
+      <Filter>childView\Editor</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_GrafixMainWindow.cpp">
       <Filter>_gen files\Debug</Filter>
     </ClCompile>
@@ -76,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\ReleaseLog\moc_GrafixMainWindow.cpp">
       <Filter>_gen files\ReleaseLog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\gra_dev\moc_GrafixMainWindow.cpp">
+      <Filter>_gen files\gra_dev</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_editorMain.cpp">
       <Filter>_gen files\Debug</Filter>
@@ -86,8 +118,8 @@
     <ClCompile Include="GeneratedFiles\ReleaseLog\moc_editorMain.cpp">
       <Filter>_gen files\ReleaseLog</Filter>
     </ClCompile>
-    <ClCompile Include="editor\editorCanvas.cpp">
-      <Filter>childView\Editor</Filter>
+    <ClCompile Include="GeneratedFiles\gra_dev\moc_editorMain.cpp">
+      <Filter>_gen files\gra_dev</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_editorCanvas.cpp">
       <Filter>_gen files\Debug</Filter>
@@ -97,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\ReleaseLog\moc_editorCanvas.cpp">
       <Filter>_gen files\ReleaseLog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\gra_dev\moc_editorCanvas.cpp">
+      <Filter>_gen files\gra_dev</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +169,27 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_editorWindow.h">
       <Filter>_gen files</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorBasicAdjust.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorAdvancedAdjust.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorEffects.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorBorders.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorLiquidation.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorCrop.h">
+      <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="editor\editorPainting.h">
+      <Filter>childView\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
