@@ -12,6 +12,17 @@
 
 #include "ui_editorWindow.h"
 
+enum class EditorFunctions{
+	Basic_Adjusts,
+	Advanced_Adjusts,
+	Prebuilt_Adjusts,
+	Image_Crop,
+	Image_Liquidation,
+	Image_Frame,
+	Stickers,
+	Painting
+};
+
 class GrafixEditorWindow : public QMainWindow
 {
 	Q_OBJECT
@@ -22,19 +33,27 @@ public:
 
 	void useCanvasContext();
 
+	CGE::CGEImageHandler& getImageHandler();
+
 protected:
 	void init();
 
 	// events
 	void resizeEvent(QResizeEvent *);
 
+	void commonMenuSwitch(EditorFunctions enumFunc);
+
 protected slots:
 	void backtoHomePage();
+
+	void toggleBasicAdjusts();
 	
 private:
 	Ui::EditorWindowClass m_ui;
 
 	CanvasWidget* m_canvas;
+
+	QWidget* m_menuWidget;
 };
 
 

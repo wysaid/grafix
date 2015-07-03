@@ -153,6 +153,9 @@
     <CustomBuild Include="editor\editorCanvas.h">
       <Filter>childView\Editor</Filter>
     </CustomBuild>
+    <CustomBuild Include="editor\editorBasicAdjustWidget.ui">
+      <Filter>_forms\editor</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="editor\editorPainting.h">
       <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_editorBasicAdjustWidget.h">
+      <Filter>_gen files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

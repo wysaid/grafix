@@ -16,7 +16,7 @@ bool enableGLFunction(void* arg)
 	return false;
 }
 
-GrafixEditorWindow::GrafixEditorWindow(QWidget* parent)
+GrafixEditorWindow::GrafixEditorWindow(QWidget* parent) : m_menuWidget(nullptr)
 {
 	m_ui.setupUi(this);
 	setMinimumSize(800, 500);
@@ -68,4 +68,21 @@ void GrafixEditorWindow::resizeEvent(QResizeEvent *)
 void GrafixEditorWindow::useCanvasContext()
 {
 	m_canvas->makeCurrent();
+}
+
+CGE::CGEImageHandler& GrafixEditorWindow::getImageHandler()
+{
+	return m_canvas->getHandler();
+
+}
+
+void GrafixEditorWindow::commonMenuSwitch(EditorFunctions enumFunc)
+{
+
+}
+
+void GrafixEditorWindow::toggleBasicAdjusts()
+{
+	CGE_LOG_INFO("Basic adjusts clicked...\n");
+	commonMenuSwitch(EditorFunctions::Basic_Adjusts);
 }
