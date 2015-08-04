@@ -48,7 +48,6 @@ protected:
 		glVertexAttribPointer(m_posAttribLocation, 2, GL_FLOAT, false, 0, 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_textureID);
-		//		glUniform1i(m_textureLocation, 0);
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	}
 
@@ -57,13 +56,15 @@ protected:
 	GLuint m_textureID;
 };
 
-class CanvasWidget : public QGLWidget
+class GrafixEditorWindow;
+
+class GrafixEditorCanvas : public QGLWidget
 {
 	Q_OBJECT
 
 public:
-	explicit CanvasWidget(QWidget* parent = nullptr);
-	~CanvasWidget();
+	explicit GrafixEditorCanvas(QWidget* parent = nullptr);
+	~GrafixEditorCanvas();
 
 	bool openImage(const QString& filename);
 
@@ -128,6 +129,8 @@ private:
 	CGE::Vec4f m_bgColor;
 	QMenu* m_contextMenu;
 	QAction* m_bgActive;
+
+	GrafixEditorWindow* m_editorWindow;
 };
 
 CGE::SharedTexture genSharedTextureWidthImageName(const char* filename, GLenum filter = GL_LINEAR);

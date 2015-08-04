@@ -9,6 +9,9 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QMenu>
+#include <QTimer>
+#include <QLabel>
+#include <QMovie>
 #include "cge.h"
 
 #define GF_STR QString::fromLocal8Bit
@@ -23,5 +26,16 @@ public:
 	static void showMainWindow();
 };
 
+class GrafixLoadingWindow : public QWidget
+{
+	Q_OBJECT
+public:
+	GrafixLoadingWindow(QWidget* parent = nullptr);
+	~GrafixLoadingWindow();
+
+protected:
+	QLabel m_label;
+	//Q
+};
 
 #endif

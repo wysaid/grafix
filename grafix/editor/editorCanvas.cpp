@@ -6,6 +6,7 @@
 
 #include "editorCanvas.h"
 
+#include "editorMain.h"
 
 #include <QMessageBox>
 #include <QMouseEvent>
@@ -53,9 +54,9 @@ void main()
 
 //////////////////////////////////////////////////////////////////////////
 
-CGEConstString CanvasWidget::paramTexSizeName = "texSize";
+CGEConstString GrafixEditorCanvas::paramTexSizeName = "texSize";
 
-CanvasWidget::CanvasWidget(QWidget* parent) : QGLWidget(parent), m_isMoving(false), m_program(nullptr), m_contextMenu(nullptr)
+GrafixEditorCanvas::GrafixEditorCanvas(QWidget* parent) : QGLWidget(parent), m_isMoving(false), m_program(nullptr), m_contextMenu(nullptr), m_editorWindow(nullptr)
 {	
 	setAttribute(Qt::WA_PaintOnScreen);
 	setAttribute(Qt::WA_NoSystemBackground);
@@ -66,14 +67,14 @@ CanvasWidget::CanvasWidget(QWidget* parent) : QGLWidget(parent), m_isMoving(fals
 	setContextMenuPolicy(Qt::DefaultContextMenu);
 }
 
-CanvasWidget::~CanvasWidget()
+GrafixEditorCanvas::~GrafixEditorCanvas()
 {
 	makeCurrent();
 	delete m_program;
 	CGE_LOG_INFO("Editor Canvas destruct...\n");
 }
 
-void CanvasWidget::paintGL()
+void GrafixEditorCanvas::paintGL()
 {
 	//The iOS device would have a framebuffer_oes object that is already binding ok.
 #ifndef Q_OS_IOS
@@ -110,7 +111,7 @@ void CanvasWidget::paintGL()
 	cgeCheckGLError("paintGL");
 }
 
-void CanvasWidget::initializeGL()
+void GrafixEditorCanvas::initializeGL()
 {
 #ifdef CGE_USE_COMPATIBLE_GL_FUNCTIONS
 	g_glFunctions = this->context()->functions();
@@ -153,7 +154,7 @@ void CanvasWidget::initializeGL()
 }
 
 //兼容retina 屏幕， 能使用经过deviceRatio 转换之后的 w 和 h
-void CanvasWidget::resizeGL(int w, int h)
+void GrafixEditorCanvas::resizeGL(int w, int h)
 {
 	m_sprite->setCanvasSize(width(), height());
 	if(m_program != nullptr)
@@ -163,7 +164,7 @@ void CanvasWidget::resizeGL(int w, int h)
 	}
 }
 
-void CanvasWidget::mousePressEvent(QMouseEvent *e)
+void GrafixEditorCanvas::mousePressEvent(QMouseEvent *e)
 {
 	if(e->button() != Qt::MouseButton::LeftButton)
 		return;
@@ -173,7 +174,7 @@ void CanvasWidget::mousePressEvent(QMouseEvent *e)
 	m_lastY = e->globalY();
 }
 
-void CanvasWidget::mouseMoveEvent(QMouseEvent *e)
+void GrafixEditorCanvas::mouseMoveEvent(QMouseEvent *e)
 {
 	if(m_isMoving)
 	{
@@ -185,13 +186,13 @@ void CanvasWidget::mouseMoveEvent(QMouseEvent *e)
 	}
 }
 
-void CanvasWidget::mouseReleaseEvent(QMouseEvent *e)
+void GrafixEditorCanvas::mouseReleaseEvent(QMouseEvent *e)
 {
 	setCursor(Qt::CursorShape::OpenHandCursor);
 	m_isMoving = false;
 }
 
-void CanvasWidget::wheelEvent(QWheelEvent *e)
+void GrafixEditorCanvas::wheelEvent(QWheelEvent *e)
 {
 	auto scaling = 1.0f + e->delta() / 2000.0f;
 
@@ -206,7 +207,7 @@ void CanvasWidget::wheelEvent(QWheelEvent *e)
 	updateGL();
 }
 
-void CanvasWidget::keyReleaseEvent(QKeyEvent *e)
+void GrafixEditorCanvas::keyReleaseEvent(QKeyEvent *e)
 {
 	switch (e->key())
 	{
@@ -221,7 +222,7 @@ void CanvasWidget::keyReleaseEvent(QKeyEvent *e)
 	}
 }
 
-void CanvasWidget::dragEnterEvent(QDragEnterEvent *e)
+void GrafixEditorCanvas::dragEnterEvent(QDragEnterEvent *e)
 {
 	auto mimedata = e->mimeData();
 	if(mimedata->hasImage() || mimedata->hasText())
@@ -230,7 +231,7 @@ void CanvasWidget::dragEnterEvent(QDragEnterEvent *e)
 	}
 }
 
-void CanvasWidget::dropEvent(QDropEvent *e)
+void GrafixEditorCanvas::dropEvent(QDropEvent *e)
 {
 	auto names = e->mimeData()->urls();
 	if(names.empty())
@@ -245,7 +246,7 @@ void CanvasWidget::dropEvent(QDropEvent *e)
 	openImage(filename);
 }
 
-void CanvasWidget::contextMenuEvent(QContextMenuEvent *e)
+void GrafixEditorCanvas::contextMenuEvent(QContextMenuEvent *e)
 {
 	if(!underMouse())
 		return;
@@ -277,7 +278,7 @@ void CanvasWidget::contextMenuEvent(QContextMenuEvent *e)
 	m_contextMenu->exec(e->globalPos());
 }
 
-bool CanvasWidget::openImage(const QString& filename)
+bool GrafixEditorCanvas::openImage(const QString& filename)
 {
 	CGE_LOG_INFO("正在打开图片 %s ...\n", (const char*)filename.toLocal8Bit());
 	QImage img(filename);
@@ -325,7 +326,7 @@ bool CanvasWidget::openImage(const QString& filename)
 	}
 }
 
-void CanvasWidget::setToOriginImage()
+void GrafixEditorCanvas::setToOriginImage()
 {
 	if(m_sprite != nullptr)
 	{
@@ -337,7 +338,7 @@ void CanvasWidget::setToOriginImage()
 	CGE_LOG_INFO("setToOriginImage\n");
 }
 
-void CanvasWidget::setToCurrentImage()
+void GrafixEditorCanvas::setToCurrentImage()
 {
 	if(m_sprite != nullptr)
 	{
@@ -349,7 +350,7 @@ void CanvasWidget::setToCurrentImage()
 	CGE_LOG_INFO("setToCurrentImage\n");
 }
 
-void CanvasWidget::restoreImage()
+void GrafixEditorCanvas::restoreImage()
 {
 	m_sprite->moveTo(width() / 2.0f, height() / 2.0f);
 	m_sprite->scaleTo(1.0f, 1.0f);
@@ -357,7 +358,7 @@ void CanvasWidget::restoreImage()
 	CGE_LOG_INFO("restoreImage\n");
 }
 
-void CanvasWidget::fitImage()
+void GrafixEditorCanvas::fitImage()
 {
 	auto& tex = m_sprite->getTexture();
 	auto scaling = CGE::CGE_MIN((float)width() / tex.width, (float)height() / tex.height);
@@ -366,24 +367,24 @@ void CanvasWidget::fitImage()
 	updateGL();
 }
 
-void CanvasWidget::imageZoom(float scaling)
+void GrafixEditorCanvas::imageZoom(float scaling)
 {
 	m_sprite->scale(scaling, scaling);
 }
 
-void CanvasWidget::imageZoomIn()
+void GrafixEditorCanvas::imageZoomIn()
 {
 	imageZoom(0.9f);
 	updateGL();
 }
 
-void CanvasWidget::imageZoomOut()
+void GrafixEditorCanvas::imageZoomOut()
 {
 	imageZoom(1.1f);
 	updateGL();
 }
 
-void CanvasWidget::bgDefault()
+void GrafixEditorCanvas::bgDefault()
 {
 	m_bgColor[3] = -1.0f; //使用格子
 	m_bgActive->setChecked(false);
@@ -396,7 +397,7 @@ void CanvasWidget::bgDefault()
 	updateGL();
 }
 
-void CanvasWidget::bgWhite()
+void GrafixEditorCanvas::bgWhite()
 {
 	m_bgColor = CGE::Vec4f(1.0f, 1.0f, 1.0f, 1.0f);
 	m_bgActive->setChecked(false);
@@ -409,7 +410,7 @@ void CanvasWidget::bgWhite()
 	updateGL();
 }
 
-void CanvasWidget::bgBlack()
+void GrafixEditorCanvas::bgBlack()
 {
 	m_bgColor = CGE::Vec4f(0.0f, 0.0f, 0.0f, 1.0f);
 	m_bgActive->setChecked(false);
@@ -422,7 +423,7 @@ void CanvasWidget::bgBlack()
 	updateGL();
 }
 
-void CanvasWidget::bgGray()
+void GrafixEditorCanvas::bgGray()
 {
 	m_bgColor = CGE::Vec4f(0.4f, 0.4f, 0.4f, 1.0f);
 	m_bgActive->setChecked(false);
@@ -435,22 +436,22 @@ void CanvasWidget::bgGray()
 	updateGL();
 }
 
-void CanvasWidget::copyImgToClipBoard()
+void GrafixEditorCanvas::copyImgToClipBoard()
 {
 
 }
 
-void CanvasWidget::saveImage()
+void GrafixEditorCanvas::saveImage()
 {
 
 }
 
-void CanvasWidget::saveImageAs()
+void GrafixEditorCanvas::saveImageAs()
 {
 
 }
 
-void CanvasWidget::fixSpritePos()
+void GrafixEditorCanvas::fixSpritePos()
 {
 
 }

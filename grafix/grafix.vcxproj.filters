@@ -133,6 +133,18 @@
     <ClCompile Include="GeneratedFiles\gra_dev\moc_editorCanvas.cpp">
       <Filter>_gen files\gra_dev</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\gra_dev\moc_main.cpp">
+      <Filter>_gen files\gra_dev</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_main.cpp">
+      <Filter>_gen files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_main.cpp">
+      <Filter>_gen files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\ReleaseLog\moc_main.cpp">
+      <Filter>_gen files\ReleaseLog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.qrc">
@@ -153,6 +165,12 @@
     <CustomBuild Include="editor\editorCanvas.h">
       <Filter>childView\Editor</Filter>
     </CustomBuild>
+    <CustomBuild Include="main.h">
+      <Filter>Main View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="loadingWidget.ui">
+      <Filter>_forms</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
@@ -163,9 +181,6 @@
     </ClInclude>
     <ClInclude Include="batch\batchMain.h">
       <Filter>childView\Batch</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Main View</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_editorWindow.h">
       <Filter>_gen files</Filter>
@@ -190,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="editor\editorPainting.h">
       <Filter>childView\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_loadingWidget.h">
+      <Filter>_gen files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@ bool enableGLFunction(void* arg)
 	return false;
 }
 
-GrafixEditorWindow::GrafixEditorWindow(QWidget* parent)
+GrafixEditorWindow::GrafixEditorWindow(QWidget* parent) : m_waitingTimer(this)
 {
 	m_ui.setupUi(this);
 	setMinimumSize(800, 500);
@@ -31,9 +31,23 @@ GrafixEditorWindow::~GrafixEditorWindow()
 void GrafixEditorWindow::init()
 {
 	m_ui.canvasView->hide();
-	m_canvas = new CanvasWidget(centralWidget());
+	m_canvas = new GrafixEditorCanvas(centralWidget());
 	CGE::cgeSetGLContextEnableFunction(enableGLFunction, this);
 	m_canvas->setGeometry(m_ui.canvasView->geometry());
+
+// 	m_waitingAnim = new QLabel();
+// 	m_waitingAnim->setText(GF_STR("图片读取中..."));
+// 	auto mov = new QMovie(":grafix/res/waitingGIFs/0.gif");
+// 	m_waitingAnim->setMovie(mov);
+// 	mov->start();
+// 	m_waitingAnim->setFixedSize(300, mov->currentImage().height());
+// 	
+// 	m_waitingAnim->setGeometry((m_canvas->width() - m_waitingAnim->width()) / 2, m_canvas->height() / 3, m_waitingAnim->width(), m_waitingAnim->height());
+// 	m_waitingAnim->setAttribute(Qt::WidgetAttribute::WA_TranslucentBackground);
+// 	m_waitingAnim->setWindowFlags(Qt::FramelessWindowHint);
+// 	m_waitingAnim->show();
+	//m_waitingAnim->setWindowModality(Qt::WindowModality::WindowModal);
+
 	connect(m_ui.homeBtn, SIGNAL(clicked()), SLOT(backtoHomePage()));
 }
 
@@ -68,4 +82,9 @@ void GrafixEditorWindow::resizeEvent(QResizeEvent *)
 void GrafixEditorWindow::useCanvasContext()
 {
 	m_canvas->makeCurrent();
+}
+
+void GrafixEditorWindow::enableWaitingStatus(bool status)
+{
+
 }

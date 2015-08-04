@@ -5,6 +5,13 @@
       <file>../res/logo.png</file>
       <file>../res/icon_ball.png</file>
 
+      <file>../res/waitingGIFs/0.gif</file>
+      <file>../res/waitingGIFs/1.gif</file>
+      <file>../res/waitingGIFs/2.gif</file>
+      <file>../res/waitingGIFs/3.gif</file>
+      <file>../res/waitingGIFs/4.gif</file>
+      <file>../res/waitingGIFs/5.gif</file>
+
       <file>../res/mainWindow/editBtn.png</file>
       <file>../res/mainWindow/collageBtn.png</file>
       <file>../res/mainWindow/batchBtn.png</file>

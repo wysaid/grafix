@@ -25,6 +25,8 @@ public:
 protected:
 	void init();
 
+	void enableWaitingStatus(bool);
+
 	// events
 	void resizeEvent(QResizeEvent *);
 
@@ -32,9 +34,13 @@ protected slots:
 	void backtoHomePage();
 	
 private:
+	QTimer m_waitingTimer;
+	QLabel* m_waitingAnim;
+
+private:
 	Ui::EditorWindowClass m_ui;
 
-	CanvasWidget* m_canvas;
+	GrafixEditorCanvas* m_canvas;
 };
 
 

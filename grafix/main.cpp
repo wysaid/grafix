@@ -23,3 +23,14 @@ void GlobalStaticVars::showMainWindow()
 	if(mainWindow != nullptr)
 		mainWindow->show();
 }
+
+GrafixLoadingWindow::GrafixLoadingWindow(QWidget* parent /* = nullptr */)
+{
+
+}
+
+GrafixLoadingWindow::~GrafixLoadingWindow()
+{
+
+}
+
